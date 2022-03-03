@@ -12,6 +12,7 @@
   "dependencies": {
     "axios": "^0.26.0",
     "dotenv": "^16.0.0",
+    "express": "^4.17.3",
     "kavenegar": "^1.1.4",
     "redis": "^4.0.3"
   },
