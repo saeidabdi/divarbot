@@ -1,38 +1,31 @@
-const search = require('./search');
 const redisServer = require('./helper/redisServer')
 const notification = require('./helper/notification')
+const fs = require('fs')
 
 
 // let wordSearch = 'مبل';
 // let catSearch = 'furniture';
+let RequestList = 'db/Requestlist.json'
 
-const findBest = (req, res) => {
+const addToScan = (req, res) => {
 
-    const {wordSearch,catSearch} = req.params;
+    const {wordSearch, catSearch} = req.params;
 
-    setInterval
-        (async () => {
+    if (!fs.existsSync(RequestList))
+        fs.writeFileSync(RequestList, '[]', null, 4);
+    const List = JSON.parse(fs.readFileSync(RequestList));
 
-            let searchData = await search({ wordSearch, catSearch })
-            let lastPost = searchData.widget_list[0].data;
-            let lastTokenKey = `lastTokenPost${catSearch}`
+    const findList = List.find(l => l.word === wordSearch && l.cat === catSearch);
+    if (findList)
+        return res.send(`exists ${wordSearch} in cat ${catSearch}`);
+    List.push({
+        word: wordSearch,
+        cat: catSearch,
+    })
+    fs.writeFileSync(RequestList, JSON.stringify(List) , null, 4)
 
-            let lastTokenPost = await redisServer.get(lastTokenKey)
+    return res.send(`insert new word : ${wordSearch} in cat : ${catSearch}`);
 
-            console.log('lastTokenPost', lastTokenPost);
-
-            if (lastTokenPost && lastTokenPost != lastPost.token) {
-                let title = 'توجه پست جدید در دسته ' + catSearch + ' و کلمه ی ' + wordSearch + ' با عنوان : ' + lastPost.title;
-                let text = 'توضیحات : ' + lastPost.description + '\n';
-                text += 'لینک : https://divar.ir/v/' + lastPost.token
-                notification('jSaSmpsmT', text, title, 'https://divar.ir/v/' + lastPost.token);
-                await redisServer.set(lastTokenKey, lastPost.token)
-            } else {
-                console.log('Repetitious', lastPost.token)
-            }
-
-            // fs.writeFileSync('./log/searchData.json', JSON.stringify(searchData, null, 2))
-        }, 5000)
 }
 
-module.exports = findBest;
+module.exports = addToScan;

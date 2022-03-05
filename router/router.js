@@ -1,8 +1,8 @@
 const router = require('express').Router()
 
-const findBest = require('../index')
+const addToScan = require('../index')
 
-router.get('/add/:wordSearch/:catSearch',findBest)
+router.get('/add/:wordSearch/:catSearch',addToScan)
 router.get('/ss',(req,res)=>{
   res.send('ssss')
 })

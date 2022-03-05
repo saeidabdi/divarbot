@@ -5,6 +5,8 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extends: true }));
 app.disable('x-powered-by')
 
+require('./bots/scan');
+
 app.use('/',
   require('./router/router')
 );
