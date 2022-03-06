@@ -1,5 +1,6 @@
 const fs = require('fs')
 const RequestList = './db/Requestlist.json'
+const UserList = './db/users.json'
 
 class Tools {
     static getInstance() {
@@ -12,7 +13,12 @@ class Tools {
         return JSON.parse(fs.readFileSync(RequestList));
     }
 
-    sleep = (ms) => new Promise(resolve => setTimeout(resolve,ms))
+    getUsersFilter({word, cat}) {
+        let allUser = JSON.parse(fs.readFileSync(UserList))
+        return allUser.filter(user => user.word === word && user.cat === cat);
+    }
+
+    sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms))
 
 }
 
