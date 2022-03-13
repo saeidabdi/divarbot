@@ -1,5 +1,6 @@
 const search = require('../services/search');
 const {tools, redisServer, notification} = require('../helper/helper')
+const getPost = require('../services/getPost')
 
 const scan = async () => {
     let listScan = tools.getScanLis()
@@ -8,12 +9,11 @@ const scan = async () => {
         await tools.sleep(5000)
         scan();
     }
-    console.log('listScan', listScan)
-    for (var i = 0; i < listScan.length; i++) {
-        let {word, cat} = listScan[i];
-        console.log(word, cat)
 
-        let searchData = await search({wordSearch: word, catSearch: cat})
+    for (var i = 0; i < listScan.length; i++) {
+        let {word, cat, city} = listScan[i];
+
+        let searchData = await search({wordSearch: word, catSearch: cat, city: city})
         let lastPost = tools.getLastPost(searchData)
 
         let lastTokenKey = `lastTokenPost${cat}${word}`
@@ -23,7 +23,7 @@ const scan = async () => {
         console.log('lastTokenPost => ' + lastTokenKey, lastTokenPost);
 
         if (lastTokenPost != lastPost.token) {
-            tools.sendNotif_2_users({word, cat, lastPost})
+            sendNotif_2_users({word, cat, lastPost})
             await redisServer.set(lastTokenKey, lastPost.token)
         } else {
             console.log('Repetitious', lastPost.token)
@@ -35,6 +35,30 @@ const scan = async () => {
     scan();
 }
 
+
+sendNotif_2_users = async (filters) => {
+    let {cat, lastPost} = filters;
+    let users = tools.getUsersFilter(filters)
+
+    let title = 'فرصت جدید خرید : ' + lastPost.title;
+    let text = 'توضیحات : ' + lastPost.description + '\n';
+    text += 'لینک : https://divar.ir/v/' + lastPost.token;
+    let post = await getPost(lastPost.token)
+
+    users.forEach(user => {
+        if (user.strategy) {
+            let filter = require('../services/strategy/' + cat + '/' + user.strategy)
+            let result = filter({
+                    post: post,
+                    config: user.config
+                }
+            )
+            if (result)
+                notification({id: user.id, text, title, action: 'https://divar.ir/v/' + lastPost.token});
+        }
+    })
+
+}
 
 
 setTimeout(scan, 3000);
