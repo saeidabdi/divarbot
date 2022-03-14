@@ -9,7 +9,7 @@ let proxyRequest = async ({path}) => {
     let agent = new HttpsProxyAgent("1.153.45.236:4009");
 
     return axios.get(encodeURI(baseUrl + '' + path), {
-        httpAgent: agent,
+        // httpAgent: agent,
     })
         .then(resultReq => resultReq.data)
         .catch(e => e)
