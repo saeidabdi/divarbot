@@ -64,7 +64,8 @@ const filter = ({post, config}) => {
 
     console.log('score', score)
     console.log('scoreEarned', scoreEarned)
-    let sumWithScore = config.flexible || 0;
+    // if(config.flexible === 0)
+    let sumWithScore = config.flexible || 10;
     if (score + sumWithScore >= scoreEarned)
         return true;
     return false;
