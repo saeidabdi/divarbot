@@ -23,17 +23,18 @@
     "strategy": "conditions.js"
   },
   {
-    "word": "پژو 405",
+    "word": "پژو",
     "cat": "car",
     "name": "saeed abdi",
     "mobile": "09028545707",
     "id": "jSaSmpsmT",
     "config": {
       "karkard": 100000,
+      "model": 1391,
       "shasi": "سالم و پلمپ",
       "body": "سالم و بی‌خط و خش|خط و خش جزئی",
       "price": 150000000,
-      "flexible": 0
+      "flexible": 5
     },
     "strategy": "conditions.js"
   }
