@@ -6,10 +6,10 @@ let baseUrl = 'https://api.divar.ir';
 let proxyRequest = async ({path}) => {
     let proxy = await getBestProxy();
     console.log(proxy)
-    let agent = new HttpsProxyAgent("1.153.45.236:4009");
+    let agent = new HttpsProxyAgent(proxy);
 
     return axios.get(encodeURI(baseUrl + '' + path), {
-        // httpAgent: agent,
+        httpAgent: agent,
     })
         .then(resultReq => resultReq.data)
         .catch(e => e)
@@ -25,10 +25,5 @@ const getBestProxy = async () => {
     return proxyList.pop()
 }
 
-const getRequestInstance = (config) => {
-    return axios.create({
-        ...config,
-    });
-};
 
 module.exports = proxyRequest;

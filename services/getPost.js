@@ -1,8 +1,10 @@
-const axios = require('axios');
+const proxyRequest = require('./requests/proxyRequest')
 
 const getPost = (token) => {
-    return axios.get('https://api.divar.ir/v8/posts/'+token)//gYqwSNDv
-        .then(response => response.data )
+    let path = '/v8/posts/'+token
+
+    return proxyRequest({path})
+        .then(data => data)
 }
 
 module.exports = getPost

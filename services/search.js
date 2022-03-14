@@ -1,5 +1,3 @@
-// const axios = require('axios');
-// const HttpsProxyAgent = require('https-proxy-agent')
 const proxyRequest = require('./requests/proxyRequest')
 
 let searchData = ({wordSearch, catSearch, city = 'tehran'}) => {
@@ -12,29 +10,14 @@ let searchData = ({wordSearch, catSearch, city = 'tehran'}) => {
     return proxyRequest({path})
         .then(data => data)
 
-    // return axios.create({
-    //     baseURL: encodeURI(url),
-    //     method: 'GET',
-    //     params: {httpAgent: agent}
-    // });
-    // return axios.get(encodeURI(url), {
-    //     httpAgent: agent,
-    //     // proxy: {
-    //     //     host: "82.196.10.171",
-    //     //     port: 61253,
-    //     // },
-    // })
-    //     .then(resultReq => resultReq.data)
-    // .catch(e => e)
-
 }
 
-// module.exports = searchData;
-(async () => {
-    let a = await searchData({
-        wordSearch: 'پژو',
-        catSearch: 'car',
-        city: 'tehran'
-    })
-    console.log('aaa', a)
-})()
+module.exports = searchData;
+// (async () => {
+//     let a = await searchData({
+//         wordSearch: 'پژو',
+//         catSearch: 'car',
+//         city: 'tehran'
+//     })
+//     console.log('aaa', a)
+// })()
