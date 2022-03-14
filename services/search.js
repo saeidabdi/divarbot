@@ -1,6 +1,6 @@
 // const axios = require('axios');
 // const HttpsProxyAgent = require('https-proxy-agent')
-const proxyRequest = require('./request/proxyRequest')
+const proxyRequest = require('./requests/proxyRequest')
 
 let searchData = ({wordSearch, catSearch, city = 'tehran'}) => {
     let path = '';
