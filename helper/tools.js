@@ -38,6 +38,7 @@ class Tools {
     string_2_number(str) {
         str = this.p2e(str)
         str = str.replace('٬','')
+            .replace('تومان','');
         return +str;
     }
 
