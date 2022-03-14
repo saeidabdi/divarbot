@@ -14,7 +14,11 @@ const scan = async () => {
         let {word, cat, city} = listScan[i];
 
         let searchData = await search({wordSearch: word, catSearch: cat, city: city})
-        let lastPost = tools.getLastPost(searchData)
+        try{
+            var lastPost = tools.getLastPost(searchData)
+        }catch (e){
+            break;
+        }
 
         let lastTokenKey = `lastTokenPost${cat}${word}`
 
