@@ -1,12 +1,5 @@
 [
   {
-    "name": "saeed",
-    "id": "jSaSmpsmT",
-    "mobile": "",
-    "word": "مبل",
-    "cat": "furniture"
-  },
-  {
     "word": "پراید",
     "cat": "car",
     "name": "saeed",
@@ -18,9 +11,10 @@
       "model": 1397,
       "motor": "سالم",
       "shasi": "سالم و پلمپ",
-      "body": "سالم و بی‌خط و خش|خط و خش جزئی"
+      "body": "سالم و بی‌خط و خش|خط و خش جزئی",
+      "flexible": 1
     },
-    "strategy": "conditions.js"
+    "strategy": "car/conditions.js"
   },
   {
     "word": "پژو",
@@ -36,6 +30,23 @@
       "price": 150000000,
       "flexible": 5
     },
-    "strategy": "conditions.js"
+    "strategy": "car/conditions.js"
+  },
+  {
+    "word": "",
+    "cat": "auto",
+    "name": "saeed abdi",
+    "mobile": "09028545707",
+    "id": "jSaSmpsmT",
+    "config": {
+      "not": "پراید وانت موتور",
+      "karkard": 100000,
+      "model": 1391,
+      "shasi": "سالم و پلمپ",
+      "body": "سالم و بی‌خط و خش|خط و خش جزئی",
+      "price": 150000000,
+      "flexible": 1
+    },
+    "strategy": "car/conditions.js"
   }
 ]

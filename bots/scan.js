@@ -20,7 +20,7 @@ const scan = async () => {
             break;
         }
 
-        let lastTokenKey = `lastTokenPost${cat}${word}`
+        let lastTokenKey = `lastTokenPost${cat}${city}${word}`
 
         let lastTokenPost = await redisServer.get(lastTokenKey)
 
@@ -51,7 +51,7 @@ sendNotif_2_users = async (filters) => {
 
     users.forEach(user => {
         if (user.strategy) {
-            let filter = require('../services/strategy/' + cat + '/' + user.strategy)
+            let filter = require('../services/strategy/' + user.strategy)
             let result = filter({
                     post: post,
                     config: user.config

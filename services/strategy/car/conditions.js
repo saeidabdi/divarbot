@@ -1,5 +1,4 @@
 const tools = require('../../../helper/tools')
-const axios = require("axios");
 
 const filter = ({post, config}) => {
     let score = 0;
@@ -11,13 +10,17 @@ const filter = ({post, config}) => {
 
     let list_data = post.widgets.list_data;
     if (!list_data)
-        return score;
+        return false;
+
+    let brand = list_data.find(l => l.title === 'برند و تیپ');
+    if(config.not && config.not.includes(brand.value))
+
 
     if (list_data[0].format === 'group_info_row') {
         list_data[0].items.map(v => {
             switch (v.title) {
                 case 'رنگ':
-                    if (config.color && config.color === v.value)
+                    if (config.color && config.color.includes(v.value))
                         score += 10;
                     break;
                 case 'کارکرد':
