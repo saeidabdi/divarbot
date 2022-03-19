@@ -59,7 +59,9 @@ sendNotif_2_users = async (filters) => {
             )
             if (result)
                 notification({id: user.id, text, title, action: 'https://divar.ir/v/' + lastPost.token});
-        }
+        }else
+            notification({id: user.id, text, title, action: 'https://divar.ir/v/' + lastPost.token});
+
     })
 
 }

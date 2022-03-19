@@ -2,13 +2,14 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const app = express()
 app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extends: true }));
+app.use(bodyParser.urlencoded({extends: true}));
+let Port = 3000;
 app.disable('x-powered-by')
-
-require('./bots/scan');
+require('./db/db'); // connect to database
+// require('./bots/scan'); // start scan bot
 
 app.use('/',
-  require('./router/router')
+    require('./router/router')
 );
 
-app.listen(3000,console.log('start server'))
+app.listen(Port, () => console.log(`start server on ${Port}`))

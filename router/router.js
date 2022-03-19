@@ -1,12 +1,11 @@
 const router = require('express').Router()
 
-const addToScan = require('../index')
-const addUser = require('../services/addUser')
+const addToScan = require('../services/controller')
+const addUser = require('../services/controller/addUser')
+const addConfig = require('../services/controller/addConfig')
 
-router.get('/add/:wordSearch/:catSearch', addToScan)
+router.get('/request/add', addToScan)
 router.get('/user/add', addUser)
-router.get('/ss', (req, res) => {
-    res.send('ssss')
-})
+router.get('/config/add', addConfig)
 
 module.exports = router

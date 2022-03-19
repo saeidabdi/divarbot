@@ -2,7 +2,7 @@
   "name": "divarBot",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "services/controller/index.js",
   "scripts": {
     "test": "jest",
     "dev": "nodemon app.js"
@@ -19,6 +19,8 @@
     "https-proxy-agent": "^5.0.0",
     "jest": "^27.5.1",
     "kavenegar": "^1.1.4",
+    "mongoose": "^6.2.6",
+    "nodemon": "^2.0.15",
     "redis": "^4.0.3"
   },
   "devDependencies": {
